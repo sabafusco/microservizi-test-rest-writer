@@ -11,3 +11,4 @@ public class RestWriterApplication {
 		SpringApplication.run(RestWriterApplication.class, args);
 	}
 }
+

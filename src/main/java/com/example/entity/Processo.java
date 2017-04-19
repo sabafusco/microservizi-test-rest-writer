@@ -68,3 +68,4 @@ public class Processo {
         return String.format("Processo[id=%d, testo='%s', processId='%d' ,processato='%d']", id, testo, processId, processato);
     }
 }
+

@@ -22,7 +22,7 @@ public class ProcessoMQ {
       try{
           
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.1.74");
+        factory.setHost("127.0.0.1");
         factory.setUsername("guest");
         factory.setPassword("guest");
         factory.setPort(5672);

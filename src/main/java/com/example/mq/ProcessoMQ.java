@@ -12,20 +12,31 @@ package com.example.mq;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
+@Component
+@ConfigurationProperties
 public class ProcessoMQ {
 
-  private final static String QUEUE_NAME = "codaProcessi";
-
+    private final static String QUEUE_NAME = "codaProcessi";
+    private static String rabbitHost;
+    private static int rabbitPort;
+    private static String rabbitUser;
+    private static String rabbitPass;  
+  
   public static boolean write(long id) throws Exception {
     
       try{
+        
+          
           
         ConnectionFactory factory = new ConnectionFactory();
-        factory.setHost("192.168.13.62");
-        factory.setUsername("guest");
-        factory.setPassword("guest");
-        factory.setPort(5672);
+        factory.setHost(rabbitHost);
+        factory.setUsername(rabbitUser);
+        factory.setPassword(rabbitPass);
+        factory.setPort(rabbitPort);
         
         Connection connection = factory.newConnection();
         
@@ -50,4 +61,27 @@ public class ProcessoMQ {
       }
         
   }
+  
+    @Value("${rabbit.host}")
+    public  void setRabbitHost(String rabbitHost) {
+        ProcessoMQ.rabbitHost = rabbitHost;
+    }
+    
+    @Value("${rabbit.port}")
+    public void setRabbitPort(int rabbitPort) {
+        ProcessoMQ.rabbitPort = rabbitPort;
+    }
+
+    @Value("${rabbit.user}")
+    public void setRabbitUser(String rabbitUser) {
+        ProcessoMQ.rabbitUser = rabbitUser;
+    }
+
+    @Value("${rabbit.pass}")
+    public void setRabbitPass(String rabbitPass) {
+        ProcessoMQ.rabbitPass = rabbitPass;
+    }
+  
+  
+  
 }
